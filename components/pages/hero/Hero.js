@@ -88,7 +88,7 @@ const Index = () => {
             display: { xs: 'none', md: 'block' },
           }}
         >
-          <Image src={hero} />
+          <Image src={hero} alt="hero" />
         </Box>
       </Container>
     </PageWrapper>
