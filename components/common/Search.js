@@ -45,9 +45,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
-    width: '-webkit-fill-available',
+    // width: '-webkit-fill-available',
+    width: '8rem',
+
     '&:focus': {
-      width: '-webkit-fill-available',
+      // width: '-webkit-fill-available',
+      width: '8rem',
     },
   },
 }));
