@@ -29,9 +29,8 @@ const NftPrice = ({ sx }) => {
         }}
       >
         {detailsObj.map((_, i) => (
-          <Box>
+          <Box key={i}>
             <Typography
-              key={i}
               variant="body2"
               sx={{
                 fontWeight: '600',
