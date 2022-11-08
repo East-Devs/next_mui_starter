@@ -2,6 +2,7 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { Typography } from '@mui/material';
+import Link from 'next/link';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -53,16 +54,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const SearchWrapper = () => {
   return (
-    <Search>
-      <StyledInputBase
-        placeholder="Search By Address/Txn Hash/Block/Token/Ens"
-        inputProps={{ 'aria-label': 'search' }}
-      />
-      <SearchButton>
-        <Typography>Search</Typography>
-        <SearchIcon />
-      </SearchButton>
-    </Search>
+    <Link href="/search">
+      <Search>
+        <StyledInputBase
+          placeholder="Search By Address/Txn Hash/Block/Token/Ens"
+          inputProps={{ 'aria-label': 'search' }}
+        />
+        <SearchButton>
+          <Typography>Search</Typography>
+          <SearchIcon />
+        </SearchButton>
+      </Search>
+    </Link>
   );
 };
 
