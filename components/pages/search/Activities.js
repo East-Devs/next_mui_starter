@@ -146,6 +146,7 @@ const TableBody = () => {
                   width={20}
                   height={20}
                   style={{ paddingLeft: '10px' }}
+                  alt="eye"
                 />
               );
             }

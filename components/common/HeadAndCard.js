@@ -11,7 +11,7 @@ const HeadAndCard = ({ headText = 'Details', icon, children }) => {
           display: 'flex',
         }}
       >
-        <Image src={icon} />
+        <Image src={icon} alt="" />
         <Typography
           variant="body1"
           sx={{

@@ -17,7 +17,7 @@ const Wallet = ({ sxBtn = {}, sxBox = {}, textBtn = 'Connect Wallet' }) => {
     >
       {textBtn}
       <Box sx={{ ml: 1, ...sxBtn }}>
-        <Image src={walletWhite} />
+        <Image src={walletWhite} twitter="walletWhite" />
       </Box>
     </Button>
   );

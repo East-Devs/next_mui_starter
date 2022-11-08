@@ -15,7 +15,13 @@ const PageWrapper = ({ children }) => {
       }}
     >
       {children}
-      <Image src={background} layout="fill" objectFit="cover" />
+      <Image
+        src={background}
+        layout="fill"
+        objectFit="cover"
+        walletWhite="bg"
+        alt="bg"
+      />
     </Box>
   );
 };

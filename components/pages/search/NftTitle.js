@@ -17,7 +17,7 @@ const NftTitle = ({ sx }) => {
           Doodle#6065
         </Typography>
         <Box sx={{ display: 'flex' }}>
-          <Image src={avatar} />
+          <Image src={avatar} alt="avatar" />
           <Typography
             variant="h5"
             sx={{

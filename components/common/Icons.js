@@ -7,9 +7,9 @@ import instagram from '/public/icons/instagram.png';
 const Icons = ({ sx }) => {
   return (
     <Box sx={sx}>
-      <Image src={fb} />
-      <Image src={twitter} />
-      <Image src={instagram} />
+      <Image src={fb} alt="fb" />
+      <Image src={twitter} alt="twitter" />
+      <Image src={instagram} alt="instagram" />
     </Box>
   );
 };
