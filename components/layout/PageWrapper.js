@@ -1,21 +1,22 @@
 import React from 'react';
-import Appbar from './Appbar';
 import { Box, Container } from '@mui/material';
+import Image from 'next/image';
+import background from '/public/background/bg.png';
 
 const PageWrapper = ({ children }) => {
   return (
-    <>
-      <Appbar />
-      <Box
-        component="main"
-        sx={{
-          backgroundColor: 'primary.light',
-          minHeight: '90vh',
-        }}
-      >
-        <Container maxWidth="xl">{children}</Container>
-      </Box>
-    </>
+    <Box
+      component="div"
+      sx={{
+        position: 'relative',
+        minHeight: '100vh',
+        height: 'auto',
+        display: 'flex',
+      }}
+    >
+      {children}
+      <Image src={background} layout="fill" objectFit="cover" />
+    </Box>
   );
 };
 

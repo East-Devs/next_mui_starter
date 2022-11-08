@@ -7,7 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import { wrapper, store, persistor } from '../store/store';
 import createEmotionCache from '../utility/createEmotionCache';
-import { lightTheme, darkTheme } from '../styles/theme/lightTheme';
+import { lightTheme, darkTheme } from '../styles/theme/theme';
 import 'react-toastify/dist/ReactToastify.css';
 
 const clientSideEmotionCache = createEmotionCache();

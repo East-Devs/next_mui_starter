@@ -1,29 +1,50 @@
 import { createTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
+import { pxToRem } from './util';
+
+function responsiveFontSizes({ xs, sm, md, lg }) {
+  return {
+    '@media (max-width:1536px)': {
+      fontSize: pxToRem(lg),
+    },
+    '@media (max-width:1200px)': {
+      fontSize: pxToRem(md),
+    },
+    '@media (max-width:900px)': {
+      fontSize: pxToRem(sm),
+    },
+    '@media (max-width: 600px)': {
+      fontSize: pxToRem(xs),
+    },
+  };
+}
 
 const light = createTheme({
   typography: {
-    fontFamily: [
-      'Urbanist',
-      '-apple-system',
-      'BlinkMacSystemFont',
-      'Segoe UI',
-      'Roboto',
-      'Helvetica Neue',
-      'Arial, sans-serif',
-      'Apple Color Emoji',
-      'Segoe UI Emoji',
-      'Segoe UI Symbol',
-    ],
+    fontFamily: ['sans-serif', 'Montserrat'],
+    h1: {
+      ...responsiveFontSizes({ xs: 30, sm: 35, md: 40, lg: 44 }),
+    },
+    h2: {
+      ...responsiveFontSizes({ xs: 25, sm: 30, md: 35, xl: 40 }),
+    },
+    h5: {
+      fontSize: '24px',
+    },
+    body1: {
+      fontSize: '20px',
+    },
+    body2: {
+      fontSize: '16px',
+    },
+    subtitle1: {
+      fontSize: '12px',
+    },
   },
   palette: {
     mode: 'light',
     primary: {
-      main: '#00C5C8',
-      light: '#F2FCFC',
-      lightDark: '#005051',
-      dark: '#005F60',
-      active: '#0BC7CA10',
+      main: '#4481DB',
     },
     secondary: {
       main: '#376fd0',
@@ -32,7 +53,7 @@ const light = createTheme({
       main: '#002f79',
     },
     fontPrimary: {
-      main: '#005051',
+      main: '#000000',
     },
     fontSecondary: {
       main: '#eee',
@@ -47,10 +68,10 @@ const light = createTheme({
       main: red.A400,
     },
     background: {
-      default: 'rgb(255, 255, 255)',
-    },
-    backgroundSecondary: {
-      default: 'white',
+      default: '#D5E8FE',
+      v1: '#C1DCF9',
+      v2: '#B2D1F2',
+      smallCard: '#E1EEFD',
     },
   },
 });
@@ -112,13 +133,6 @@ const dark = createTheme({
 const { breakpoints, palette } = light;
 
 const overrides = {
-  MuiCssBaseline: {
-    '@global': {
-      html: {
-        fontSize: '13px',
-      },
-    },
-  },
   MuiContainer: {
     root: {
       paddingRight: '0rem',
@@ -146,41 +160,6 @@ const overrides = {
     },
   },
 
-  MuiTypography: {
-    h1: {
-      fontSize: '4.5rem',
-      [breakpoints.down('sm')]: {
-        fontSize: '1.8rem',
-      },
-    },
-    h2: {
-      fontSize: '3.75rem',
-      [breakpoints.down('sm')]: {
-        fontSize: '1.5rem',
-      },
-    },
-    h4: {
-      fontSize: '3rem',
-      [breakpoints.down('sm')]: {
-        fontSize: '1rem',
-      },
-    },
-    h5: {
-      fontSize: '2.1rem',
-      [breakpoints.down('sm')]: {
-        fontSize: '0.9rem',
-      },
-    },
-    h6: {
-      fontSize: '1.5rem',
-      [breakpoints.down('sm')]: {
-        fontSize: '0.8rem',
-      },
-    },
-    body1: {
-      fontSize: '1.1rem',
-    },
-  },
   MuiInputBase: {
     root: {
       [breakpoints.down('sm')]: {
@@ -235,11 +214,6 @@ export const lightTheme = {
       },
       outlined: {
         zIndex: '0',
-      },
-    },
-    MuiTypography: {
-      body2: {
-        color: palette.fontPrimary.main,
       },
     },
     MuiInput: {
