@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import Image from 'next/image';
 import background from '/public/background/bg.png';
 
-import hero from '/public/background/hero.png';
+import hero from '/public/background/hero1.png';
 import SearchWrapper from '../../common/Search';
 import Icons from '../../common/Icons';
 import PageWrapper from '../../layout/PageWrapper';

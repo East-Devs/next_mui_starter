@@ -1,11 +1,13 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
+import Border from '../../common/Border';
 import HeadAndCard from '../../common/HeadAndCard';
+import HeadingPagi from '../../common/Table/HeadingPagi';
+import Pagination from '../../common/Table/Pagination';
 import des from '/public/icons/activities.png';
 import eye from '/public/icons/eye.png';
 
-const arr = ['First', '<', 1, 2, 3, '>'];
 const head = ['', 'Txn Hash', 'Age', 'Action', 'Price', 'From', 'To'];
 const activities = [
   {
@@ -41,21 +43,10 @@ const Description = ({ sx }) => {
     <Box sx={{ gridArea: 'activities', mb: { xs: 2, md: 0 } }}>
       <HeadAndCard icon={des} headText="Item Activity">
         <Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Typography variant="body2">
-              A total number of 12 records found
-            </Typography>
-            <Pagination mobile={false} />
-          </Box>
+          <HeadingPagi text="A total number of 12 records found" />
           <Border />
           <TableHead />
           <Border />
-
           <TableBody />
           <Pagination />
         </Box>
@@ -63,45 +54,6 @@ const Description = ({ sx }) => {
     </Box>
   );
 };
-
-const Border = ({ mobile }) => (
-  <Box
-    sx={{
-      display: { xs: !mobile && 'none', md: 'block' },
-      borderBottom: '1px solid black',
-      my: 2,
-    }}
-  />
-);
-
-const Pagination = ({ mobile }) => (
-  <Box
-    sx={{
-      marginLeft: 'auto',
-      width: 'fit-content',
-      display: {
-        xs: !mobile && 'none',
-        md: 'block',
-      },
-    }}
-  >
-    {arr.map((_, i) => (
-      <Box
-        component="span"
-        key={i}
-        sx={{
-          px: 2,
-          py: 1,
-          backgroundColor: 'background.smallCard',
-          mx: 1,
-          borderRadius: '4px',
-        }}
-      >
-        {_}
-      </Box>
-    ))}
-  </Box>
-);
 
 const TableHead = () => (
   <Box

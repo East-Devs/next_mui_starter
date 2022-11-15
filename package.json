@@ -19,6 +19,7 @@
     "@mui/styles": "^5.9.0",
     "@reduxjs/toolkit": "^1.8.3",
     "axios": "^0.27.2",
+    "ethers": "^5.7.2",
     "formik": "^2.2.9",
     "next": "12.3.1",
     "next-redux-wrapper": "^7.0.5",
@@ -28,6 +29,7 @@
     "react-toastify": "^9.0.5",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
+    "toast": "^0.5.4",
     "yup": "^0.32.11"
   },
   "devDependencies": {

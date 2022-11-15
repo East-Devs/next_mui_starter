@@ -40,6 +40,9 @@ const light = createTheme({
     subtitle1: {
       fontSize: '12px',
     },
+    subtitle2: {
+      fontSize: '10px',
+    },
   },
   palette: {
     mode: 'light',
