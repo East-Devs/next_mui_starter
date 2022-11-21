@@ -5,11 +5,11 @@ import { CardBox } from '../../styled/MarginBox';
 
 const NftPrice = ({ sx }) => {
   const { collection } = useSelector((state) => state.tokens);
-  const minValue = collection?.[2][0].min_value;
-  const minEth = collection?.[2][0].min_eth;
+  const minValue = collection?.[2][0]?.min_value;
+  const minEth = collection?.[2][0]?.min_eth;
 
-  const maxValue = collection?.[2][0].min_value;
-  const maxEth = collection?.[2][0].min_eth;
+  const maxValue = collection?.[2][0]?.min_value;
+  const maxEth = collection?.[2][0]?.min_eth;
 
   const detailsObj = [
     {
