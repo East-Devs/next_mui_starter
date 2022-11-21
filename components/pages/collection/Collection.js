@@ -102,9 +102,8 @@ const CardWrapper = ({ currentPosts }) => {
           },
         ];
         return (
-          <Link href="/token">
+          <Link href="/token" key={i}>
             <Box
-              key={i}
               onClick={() => {
                 dispatch(setSelectedToken(_));
               }}

@@ -8,6 +8,7 @@ const TableHead = ({ columns, handleSorting }) => {
         {columns.map(({ label, accessor, sortable }) => {
           return (
             <Arrows
+              key={label}
               label={label}
               accessor={accessor}
               sortable={sortable}
