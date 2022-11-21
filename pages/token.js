@@ -14,7 +14,7 @@ import NftTitle from '../components/pages/search/NftTitle';
 import { getTransactions } from '../store/tokenAction';
 import { setTransactions } from '../store/tokenSlice';
 
-const search = () => {
+const Search = () => {
   const dispatch = useDispatch();
   const { selectedContract } = useSelector((state) => state.tokens);
 
@@ -71,4 +71,4 @@ const search = () => {
   );
 };
 
-export default search;
+export default Search;

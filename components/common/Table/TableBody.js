@@ -18,14 +18,14 @@ const TableBody = ({ tableData, columns }) => {
   return (
     <>
       <tbody>
-        {currentPosts.map((data) => {
+        {currentPosts.map((data, i) => {
           return (
             <tr key={data.id}>
-              {columns.map(({ accessor }) => {
+              {columns.map(({ accessor, ci }) => {
                 const tData = data[accessor] ? data[accessor] : ' ';
                 if (accessor === 'img') {
                   return (
-                    <td style={{ width: '25%' }}>
+                    <td style={{ width: '25%' }} key={ci}>
                       <img
                         src={`${
                           tData.includes('data:image/')
@@ -37,7 +37,9 @@ const TableBody = ({ tableData, columns }) => {
                     </td>
                   );
                 } else if (accessor === 'datetimeStart') {
-                  return <td>{moment(tData).format('YYYY-MM-DD HH:mm')}</td>;
+                  return (
+                    <td key={ci}>{moment(tData).format('YYYY-MM-DD HH:mm')}</td>
+                  );
                 }
 
                 return <td key={accessor}>{tData}</td>;
