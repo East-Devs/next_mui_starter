@@ -19,7 +19,7 @@ const Wallet = ({ sxBtn = {}, sxBox = {}, textBtn = 'Connect Wallet' }) => {
   };
 
   return (
-    <Link href="/search">
+    <Link href="/token">
       <Button
         variant="contained"
         sx={{

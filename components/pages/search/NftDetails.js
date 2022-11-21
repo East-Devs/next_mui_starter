@@ -1,37 +1,41 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import BarElements from '../../common/BarElements';
 import HeadAndCard from '../../common/HeadAndCard';
 import detail from '/public/icons/details.png';
 
-const detailsObj = [
-  {
-    name: 'Owner',
-    value: '0x27df6ec5ca4f62707cf8181588b',
-  },
-  {
-    name: 'Contract Address:',
-    value: '0x2ec5ca4f62707cf8181588b03',
-  },
-  {
-    name: 'Creator:',
-    value: 'Doodles: Deployer',
-  },
-  {
-    name: 'Classification:',
-    value: 'Off-Chain (IPFS)',
-  },
-  {
-    name: 'Token ID:',
-    value: '6065',
-  },
-  {
-    name: 'Token Standard:',
-    value: 'ERC-721',
-  },
-];
-
 const NftDetails = ({ sx }) => {
+  const { selectedToken, selectedContract, collection } = useSelector(
+    (state) => state.tokens
+  );
+
+  const detailsObj = [
+    {
+      name: 'Owner',
+      value: selectedToken.owner,
+    },
+    {
+      name: 'Contract Address:',
+      value: selectedContract.id,
+    },
+    {
+      name: 'Creator:',
+      value: selectedContract.name,
+    },
+    {
+      name: 'Classification:',
+      value: 'Off-Chain (IPFS)',
+    },
+    {
+      name: 'Token ID:',
+      value: selectedToken.identifier,
+    },
+    {
+      name: 'Token Standard:',
+      value: collection?.[0][0].erc72_1tokens_count === '0' ? 'false' : 'true',
+    },
+  ];
   return (
     <Box sx={{ gridArea: 'nftDetails' }}>
       <HeadAndCard icon={detail} headText="Details">

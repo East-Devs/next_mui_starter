@@ -1,5 +1,6 @@
 import { Box, Container } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../components/common/Footer';
 import Header from '../components/common/Header';
 import PageWrapper from '../components/layout/PageWrapper';
@@ -10,8 +11,23 @@ import NftImage from '../components/pages/search/NftImage';
 import NftPrice from '../components/pages/search/NftPrice';
 import NftProperties from '../components/pages/search/NftProperties';
 import NftTitle from '../components/pages/search/NftTitle';
+import { getTransactions } from '../store/tokenAction';
+import { setTransactions } from '../store/tokenSlice';
 
 const search = () => {
+  const dispatch = useDispatch();
+  const { selectedContract } = useSelector((state) => state.tokens);
+
+  async function apiCall() {
+    const data = await getTransactions(selectedContract.id);
+    console.log(data.data);
+    dispatch(setTransactions(data.data));
+  }
+
+  useEffect(() => {
+    apiCall();
+  }, []);
+
   return (
     <PageWrapper>
       <Container
@@ -20,37 +36,36 @@ const search = () => {
           my: { xs: 2, md: 5 },
         }}
       >
+        <Header
+          sx={{
+            display: 'grid',
+            gridTemplateAreas: '"space search walletBtn"',
+            height: '250px',
+          }}
+        />
         <Box
           sx={{
             display: { md: 'grid' },
             gridTemplateAreas: {
-              xs: "'header' 'nftTitle' 'nftImage' 'nftImage' 'nftPrice nftProperties' 'description' 'activities' 'footer'",
-              md: "'header header' 'nftTitle nftDetails' 'nftImage nftDetails' 'nftImage nftProperties' 'nftPrice nftProperties' 'description description' 'activities activities' 'footer footer'",
+              md: "'nftTitle nftDetails' 'nftImage nftDetails' 'nftImage nftProperties' 'nftPrice nftProperties'",
             },
             gridTemplateColumns: { md: '1fr 1.3fr' },
             gridTemplateRows: {
               xs: '',
-              md: '100px 150px 280px 200px 130px 220px 450px 100px',
+              md: '150px 280px 200px 130px',
             },
             gap: 3,
           }}
         >
-          <Header
-            sx={{
-              gridArea: 'header',
-              display: 'grid',
-              gridTemplateAreas: '"space search walletBtn"',
-            }}
-          />
           <NftTitle sx={{ gridArea: 'nftTitle' }} />
           <NftDetails sx={{ gridArea: 'nftDetails' }} />
           <NftProperties sx={{ gridArea: 'nftProperties' }} />
           <NftPrice sx={{ gridArea: 'nftPrice' }} />
           <NftImage sx={{ gridArea: 'nftImage' }} />
-          <Description sx={{ gridArea: 'description' }} />
-          <Activities sx={{ gridArea: 'activities' }} />
-          <Footer sx={{ gridArea: 'footer' }} />
         </Box>
+        <Description />
+        <Activities />
+        <Footer />
       </Container>
     </PageWrapper>
   );

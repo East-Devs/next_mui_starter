@@ -1,20 +1,25 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { CardBox } from '../../styled/MarginBox';
 import avatar from '/public/nft/avatar.png';
+
 const NftTitle = ({ sx }) => {
+  const { selectedToken, selectedContract } = useSelector(
+    (state) => state.tokens
+  );
   return (
     <Box sx={{ gridArea: 'nftTitle' }}>
       <CardBox>
         <Typography
-          variant="h2"
+          variant="h4"
           sx={{
             fontWeight: '700',
             pb: 1,
           }}
         >
-          Doodle#6065
+          {`${selectedContract?.name} #${selectedToken?.identifier}`}
         </Typography>
         <Box sx={{ display: 'flex' }}>
           <Image src={avatar} alt="avatar" />
@@ -25,7 +30,7 @@ const NftTitle = ({ sx }) => {
               px: 1,
             }}
           >
-            Doodle#6065
+            {selectedToken?.info?.name}
           </Typography>
         </Box>
       </CardBox>

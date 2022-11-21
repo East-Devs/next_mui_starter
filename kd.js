@@ -1,1 +1,0 @@
-cargo run -p graph-node --release -- --postgres-url postgresql://postgres:0x338B0FrIzHuB_0x7e6NfTSpY@nftspy.ckdoousg9mgy.us-east-1.rds.amazonaws.com:5432/graph-node --ethereum-rpc mainnet:http://localhost:8545 --ipfs 127.0.0.1:5001

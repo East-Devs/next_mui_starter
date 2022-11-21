@@ -9,15 +9,19 @@ import { wrapper, store, persistor } from '../store/store';
 import createEmotionCache from '../utility/createEmotionCache';
 import { lightTheme, darkTheme } from '../styles/theme/theme';
 import 'react-toastify/dist/ReactToastify.css';
+import Head from 'next/head';
 
 const clientSideEmotionCache = createEmotionCache();
 
 const App = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  const theme = useSelector((state) => state.counter.theme);
+  const theme = useSelector((state) => state.tokens.theme);
 
   return (
     <CacheProvider value={emotionCache}>
+      <Head>
+        <title>Milonis</title>
+      </Head>
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
           <ThemeProvider theme={false ? darkTheme : lightTheme}>

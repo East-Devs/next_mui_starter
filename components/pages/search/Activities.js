@@ -1,12 +1,14 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Border from '../../common/Border';
 import HeadAndCard from '../../common/HeadAndCard';
 import HeadingPagi from '../../common/Table/HeadingPagi';
 import Pagination from '../../common/Table/Pagination';
 import des from '/public/icons/activities.png';
 import eye from '/public/icons/eye.png';
+import moment from 'moment';
 
 const head = ['', 'Txn Hash', 'Age', 'Action', 'Price', 'From', 'To'];
 const activities = [
@@ -39,16 +41,39 @@ const activities = [
   },
 ];
 const Description = ({ sx }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const { transactions } = useSelector((state) => state.tokens);
+
+  const [recordPerPage, setRecordsPerPage] = useState(10);
+
+  const indexOfLastRecord = currentPage * recordPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordPerPage;
+  const currentPosts = transactions?.slice(
+    indexOfFirstRecord,
+    indexOfLastRecord
+  );
+
   return (
-    <Box sx={{ gridArea: 'activities', mb: { xs: 2, md: 0 } }}>
+    <Box sx={{ gridArea: 'activities', mb: { xs: 2, md: 0 }, my: 3 }}>
       <HeadAndCard icon={des} headText="Item Activity">
         <Box>
-          <HeadingPagi text="A total number of 12 records found" />
+          <HeadingPagi
+            text="A total number of 12 records found"
+            tableData={transactions?.length}
+            recordPerPage={recordPerPage}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
           <Border />
           <TableHead />
           <Border />
-          <TableBody />
-          <Pagination />
+          <TableBody currentPosts={currentPosts} />
+          <Pagination
+            tableData={transactions?.length}
+            recordPerPage={recordPerPage}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </Box>
       </HeadAndCard>
     </Box>
@@ -76,53 +101,95 @@ const TableHead = () => (
   </Box>
 );
 
-const TableBody = () => {
+const TableBody = ({ currentPosts }) => {
   return (
     <>
-      {activities.map((activity, activityId) => (
+      {currentPosts.map((activity, activityId) => (
         <Box
           key={activityId}
           sx={{
             display: { md: 'grid' },
-            gridTemplateAreas: "'icon hash age action price from to'",
+            gridTemplateAreas: "'icon hash date action price from to'",
             gridTemplateColumns: '0.2fr 1fr 1fr 0.4fr 1fr 1fr 1fr',
+            gap: 1,
             pb: 2,
           }}
         >
-          {Object.keys(activity).map((key, i) => {
-            if (key == 'icon') {
-              return (
-                <Image
-                  key={i}
-                  src={eye}
-                  width={20}
-                  height={20}
-                  style={{ paddingLeft: '10px' }}
-                  alt="eye"
-                />
-              );
-            }
-            return (
-              <Box
-                key={i}
-                sx={{
-                  display: { xs: 'grid', md: 'block' },
-                  gridTemplateAreas: 't1 t2',
-                  gridTemplateColumns: '1fr 2fr',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <Typography
-                  variant="body2"
-                  sx={{ fontWeight: '700', pr: 3, display: { md: 'none' } }}
-                >
-                  {key}
-                </Typography>
-                <Typography variant="body2">{activity[key]}</Typography>
-              </Box>
-            );
-          })}
+          {/* {Object.keys(activity).map((key, i) => { */}
+          {/* if (key == 'vid') { */}
+          {/* return ( */}
+          <Box
+            sx={{
+              position: 'relative',
+              width: '20px',
+              height: '20px',
+              gridArea: 'icon',
+            }}
+          >
+            <Image src={eye} alt="eye" />
+          </Box>
+          {/* ); */}
+          {/* } else if (key == 'block_range') { */}
+          {/* return; */}
+          {/* } */}
+          {/* return ( */}
+
+          <Typography
+            variant="body2"
+            sx={{
+              gridArea: 'hash',
+              overflow: 'hidden',
+            }}
+          >
+            {activity.id}
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              gridArea: 'date',
+              overflow: 'hidden',
+            }}
+          >
+            {moment(activity.date).format('YYYY-MM-DD')}
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              gridArea: 'price',
+              overflow: 'hidden',
+            }}
+          >
+            {`${Number(activity.value).toFixed(2)} eth ${(
+              activity.eth * activity.value
+            ).toFixed(2)}USD`}
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              gridArea: 'from',
+              overflow: 'hidden',
+            }}
+          >
+            {activity.from}
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              gridArea: 'to',
+              overflow: 'hidden',
+            }}
+          >
+            {activity.to}
+          </Typography>
+          {/* <Typography
+            variant="body2"
+            sx={{
+              gridArea: 'hash',
+              overflow: 'hidden',
+            }}
+          >
+            {activity.id}
+          </Typography> */}
         </Box>
       ))}
     </>

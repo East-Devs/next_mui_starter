@@ -1,9 +1,11 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import nft from '/public/nft/nft.png';
 
 export const NftTitle = () => {
+  const { collection } = useSelector((state) => state.tokens);
   return (
     <Box
       sx={{
@@ -35,7 +37,7 @@ export const NftTitle = () => {
         >
           TOKEN
         </Typography>
-        <Typography component="body1">Doodles</Typography>
+        <Typography component="body1">{collection?.[0][0].name}</Typography>
       </Box>
     </Box>
   );

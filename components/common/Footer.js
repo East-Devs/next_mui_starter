@@ -7,9 +7,9 @@ const Footer = ({ sx }) => {
   return (
     <Box
       sx={{
-        gridArea: 'footer',
         display: 'flex',
         justifyContent: 'space-between',
+        my: 3,
       }}
     >
       <Typography variant="body1" sx={{ color: 'white', fontWeight: '600' }}>

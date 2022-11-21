@@ -1,28 +1,35 @@
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import BarElements from '../../common/BarElements';
 import Border from '../../common/Border';
 import HeadAndCard from '../../common/HeadAndCard';
 
-const heading = ['Minimum Price', '$8,370.56 @ 5.300000 ETH'];
-
-const detailsObj = [
-  {
-    name: 'Max Total Supply:',
-    value: '10,000 DODDLE',
-  },
-  {
-    name: 'Holder:',
-    value: '5,233',
-  },
-  {
-    name: 'Transfers:',
-    value: '-',
-  },
-];
-
 const Overview = ({ sxBox }) => {
+  const { collection } = useSelector((state) => state.tokens);
+  const heading = [
+    'Minimum Price',
+    `$ @${collection?.[2][0]?.min_value || 'No Transaction'} ${Number(
+      collection?.[2][0]?.min_eth
+    ).toFixed(3)} ETH`,
+  ];
+
+  const detailsObj = [
+    {
+      name: 'Max Total Supply:',
+      value: collection?.[0][0].erc72_1tokens_count,
+    },
+    {
+      name: 'Holder:',
+      value: '5,233',
+    },
+    {
+      name: 'Transfers:',
+      value: '-',
+    },
+  ];
+
   return (
     <Box sx={{ ...sxBox }}>
       <HeadAndCard headText="Overview (ERC-721)">

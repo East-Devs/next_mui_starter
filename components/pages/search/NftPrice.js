@@ -1,26 +1,34 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { CardBox } from '../../styled/MarginBox';
 
-const detailsObj = [
-  {
-    name: 'Min. Price',
-    eth: '3.4 Eth',
-    usd: '$8,318.24',
-  },
-  {
-    name: 'Last Sale (Item)',
-    eth: '14.3 Eth',
-    usd: '$8,318.24',
-  },
-  {
-    name: 'Last Sale (Contract)',
-    eth: '6.4 Eth',
-    usd: '$8,318.24',
-  },
-];
-
 const NftPrice = ({ sx }) => {
+  const { collection } = useSelector((state) => state.tokens);
+  const minValue = collection?.[2][0].min_value;
+  const minEth = collection?.[2][0].min_eth;
+
+  const maxValue = collection?.[2][0].min_value;
+  const maxEth = collection?.[2][0].min_eth;
+
+  const detailsObj = [
+    {
+      name: 'Min. Price',
+      eth: `${minValue} Eth`,
+      usd: `$${+minValue * +minEth}`,
+    },
+    {
+      name: 'Last Sale (Item)',
+      eth: '14.3 Eth',
+      usd: '$8,318.24',
+    },
+    {
+      name: 'Max. Price',
+      eth: `${maxValue} Eth`,
+      usd: `$${+maxValue * +maxEth}`,
+    },
+  ];
+
   return (
     <Box sx={{ gridArea: 'nftPrice' }}>
       <CardBox

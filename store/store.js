@@ -1,9 +1,4 @@
-import {
-  Action,
-  configureStore,
-  EnhancedStore,
-  ThunkAction,
-} from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -15,21 +10,18 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { combineReducers, Store } from 'redux';
-import counterReducer from './counterSlice';
-// import logger from "redux-logger";
-import accountReducer from './usersSlice';
-import { createWrapper, MakeStore } from 'next-redux-wrapper';
+import { combineReducers } from 'redux';
+import tokenReducer from './tokenSlice';
+import { createWrapper } from 'next-redux-wrapper';
 
 const persistConfig = {
-  key: 'root',
+  key: 'milonis',
   version: 1,
   storage,
 };
 
 const rootReducer = combineReducers({
-  counter: counterReducer,
-  users: accountReducer,
+  tokens: tokenReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -52,7 +44,3 @@ const makeStore = (context) => setupStore(context);
 export const persistor = persistStore(store);
 
 export const wrapper = createWrapper(makeStore);
-
-// export type AppDispatch = typeof store.dispatch;
-// export type RootState = ReturnType<typeof store.getState>;
-// export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;

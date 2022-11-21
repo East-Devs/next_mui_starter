@@ -1,24 +1,27 @@
 import { Box } from '@mui/system';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import BarElements from '../../common/BarElements';
 import HeadAndCard from '../../common/HeadAndCard';
 
-const detailsObj = [
-  {
-    name: 'Contract:',
-    value: '0x2ec5ca4f62707cf8181588',
-  },
-  {
-    name: 'Official Site: ',
-    value: 'http://dummy.io',
-  },
-  {
-    name: 'Social Profiles:',
-    value: '-',
-  },
-];
-
 const Summary = ({ sxBox }) => {
+  const { collection } = useSelector((state) => state.tokens);
+
+  const detailsObj = [
+    {
+      name: 'Contract:',
+      value: collection?.[0][0].as_account,
+    },
+    {
+      name: 'Symbol: ',
+      value: collection?.[0][0].symbol,
+    },
+    {
+      name: 'Social Profiles:',
+      value: '-',
+    },
+  ];
+
   return (
     <Box sx={{ ...sxBox }}>
       <HeadAndCard headText="Profile Summary (Edit)">

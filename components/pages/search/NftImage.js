@@ -1,15 +1,22 @@
 import { Box } from '@mui/material';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import nft from '/public/nft/nft.png';
+import { useSelector } from 'react-redux';
+import ImageFallback from '../../common/FallbackImage';
 
 const NftImage = ({ sx }) => {
+  const { selectedToken } = useSelector((state) => state.tokens);
   return (
-    <Box sx={{ ...sx }}>
-      <Link href="/collections">
-        <Image src={nft} alt="nft" />
-      </Link>
+    <Box
+      sx={{
+        ...sx,
+        position: 'relative',
+        '& > span': {
+          borderRadius: '20px',
+        },
+      }}
+    >
+      <ImageFallback src={selectedToken?.info?.image} layout="fill" />
     </Box>
   );
 };

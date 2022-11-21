@@ -91,6 +91,15 @@ const Index = () => {
           <Image src={hero} alt="hero" />
         </Box>
       </Container>
+      {/* <Box
+        sx={{
+          width: '100vw',
+          height: '100vh',
+          backgroundColor: 'red',
+          zIndex: 100,
+          position: 'gray',
+        }}
+      /> */}
     </PageWrapper>
   );
 };

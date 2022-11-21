@@ -1,50 +1,70 @@
 import { Box, Container } from '@mui/material';
+import { useRouter } from 'next/router';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../components/common/Footer';
 import Header from '../components/common/Header';
+import Loading from '../components/layout/Loading';
 import PageWrapper from '../components/layout/PageWrapper';
 import Collection from '../components/pages/collection/Collection';
 import { NftTitle } from '../components/pages/collection/NftTitle';
 import Overview from '../components/pages/collection/Overview';
 import Summary from '../components/pages/collection/Summary';
+import { getCollection } from '../store/tokenAction';
+import { setCollection } from '../store/tokenSlice';
 
 const Collections = () => {
+  const { collection, selectedContract } = useSelector((state) => state.tokens);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  async function apiCall() {
+    const data = await getCollection(selectedContract.id);
+    dispatch(setCollection(data.data));
+  }
+
+  React.useEffect(() => {
+    apiCall();
+    const handleRouteChange = () => {
+      // dispatch(setCollection(null));
+    };
+
+    router.events.on('routeChangeStart', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange);
+    };
+  }, []);
+
   return (
     <PageWrapper>
+      <Loading loading={collection === null ? true : false} />
       <Container
         sx={{
           zIndex: 1,
           my: { xs: 2, md: 5 },
         }}
       >
+        <Header
+          sx={{
+            gridArea: 'header',
+            display: 'grid',
+            gridTemplateAreas: '"space search walletBtn"',
+          }}
+        />
+        <NftTitle sx={{ gridArea: 'nftTitle' }} />
         <Box
           sx={{
             display: { md: 'grid' },
-            gridTemplateAreas: {
-              xs: "'header' 'nftTitle' 'nftImage' 'overview' 'summary collection' 'footer'",
-              md: "'header header' 'nftTitle nftTitle' 'overview summary' 'collection collection' 'footer footer'",
-            },
-            gridTemplateColumns: { md: '1fr 1fr' },
-            gridTemplateRows: {
-              xs: '',
-              md: '100px 150px 320px 1fr 100px',
-            },
+            gridTemplateAreas: "'overview summary'",
+            gridTemplateColumns: '1fr 1fr',
             gap: 3,
           }}
         >
-          <Header
-            sx={{
-              gridArea: 'header',
-              display: 'grid',
-              gridTemplateAreas: '"space search walletBtn"',
-            }}
-          />
-          <NftTitle sx={{ gridArea: 'nftTitle' }} />
           <Overview sxBox={{ gridArea: 'overview' }} />
           <Summary sxBox={{ gridArea: 'summary' }} />
-          <Collection sxBox={{ gridArea: 'collection' }} />
-          <Footer sxBox={{ gridArea: 'footer' }} />
         </Box>
+        <Collection sxBox={{ gridArea: 'collection' }} />
+        <Footer sxBox={{ gridArea: 'footer' }} />
       </Container>
     </PageWrapper>
   );

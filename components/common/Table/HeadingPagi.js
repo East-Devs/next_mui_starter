@@ -1,7 +1,13 @@
 import { Box, Typography } from '@mui/material';
 import Pagination from './Pagination';
 
-const HeadingPagi = ({ text }) => {
+const HeadingPagi = ({
+  text,
+  recordPerPage,
+  tableData,
+  currentPage,
+  setCurrentPage,
+}) => {
   return (
     <Box
       sx={{
@@ -10,7 +16,13 @@ const HeadingPagi = ({ text }) => {
       }}
     >
       <Typography variant="body2">{text}</Typography>
-      <Pagination mobile={false} />
+      <Pagination
+        mobile={false}
+        tableData={tableData}
+        recordPerPage={recordPerPage}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </Box>
   );
 };
