@@ -3,10 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   theme: true,
   searchResults: [],
+  isLoadingResults: false,
   selectedContract: null,
   selectedToken: null,
   collection: null,
-  isLoadingCollection: false,
+  isLoadingCollections: false,
   transactions: [],
 };
 
@@ -19,6 +20,10 @@ export const tokenSlice = createSlice({
     },
     setSearchResults: (state, action) => {
       state.searchResults = action.payload;
+      state.isLoadingResults = false;
+    },
+    setIsLoadingResults: (state, action) => {
+      state.isLoadingResults = action.payload;
     },
     setSelectedContract: (state, action) => {
       state.selectedContract = action.payload;
@@ -29,6 +34,9 @@ export const tokenSlice = createSlice({
     setCollection: (state, action) => {
       state.collection = action.payload;
     },
+    setIsLoadingCollections: (state, action) => {
+      state.isLoadingCollections = action.payload;
+    },
     setTransactions: (state, action) => {
       state.transactions = action.payload;
     },
@@ -38,9 +46,11 @@ export const tokenSlice = createSlice({
 export const {
   toggleTheme,
   setSearchResults,
+  setIsLoadingResults,
   setSelectedContract,
   setSelectedToken,
   setCollection,
+  setIsLoadingCollections,
   setTransactions,
 } = tokenSlice.actions;
 

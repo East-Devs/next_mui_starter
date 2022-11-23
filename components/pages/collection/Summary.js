@@ -10,11 +10,11 @@ const Summary = ({ sxBox }) => {
   const detailsObj = [
     {
       name: 'Contract:',
-      value: collection?.[0][0].as_account,
+      value: collection?.[0][0]?.as_account,
     },
     {
       name: 'Symbol: ',
-      value: collection?.[0][0].symbol,
+      value: collection?.[0][0]?.symbol,
     },
     {
       name: 'Social Profiles:',

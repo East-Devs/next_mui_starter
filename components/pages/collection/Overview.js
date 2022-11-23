@@ -18,7 +18,7 @@ const Overview = ({ sxBox }) => {
   const detailsObj = [
     {
       name: 'Max Total Supply:',
-      value: collection?.[0][0].erc72_1tokens_count,
+      value: collection?.[0][0]?.erc72_1tokens_count,
     },
     {
       name: 'Holder:',

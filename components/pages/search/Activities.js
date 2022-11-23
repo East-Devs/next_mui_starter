@@ -150,7 +150,7 @@ const TableBody = ({ currentPosts }) => {
               overflow: 'hidden',
             }}
           >
-            {moment(activity.date).format('YYYY-MM-DD')}
+            {moment(activity.date * 1000).format('YYYY-MM-DD')}
           </Typography>
           <Typography
             variant="body2"

@@ -75,6 +75,7 @@ const light = createTheme({
       v1: '#C1DCF9',
       v2: '#B2D1F2',
       smallCard: '#E1EEFD',
+      blurGrey: '#BFC4CC',
     },
   },
 });

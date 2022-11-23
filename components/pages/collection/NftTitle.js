@@ -37,7 +37,8 @@ export const NftTitle = () => {
         >
           TOKEN
         </Typography>
-        <Typography component="body1">{collection?.[0][0].name}</Typography>
+
+        <Typography component="body1">{collection?.[0][0]?.name}</Typography>
       </Box>
     </Box>
   );

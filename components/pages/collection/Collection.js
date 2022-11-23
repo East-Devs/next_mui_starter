@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedToken } from '../../../store/tokenSlice';
-import Border from '../../common/Border';
+import Border, { ShodowBox } from '../../common/Border';
 import ImageFallback from '../../common/FallbackImage';
 import HeadingPagi from '../../common/Table/HeadingPagi';
 import { CardBox } from '../../styled/MarginBox';
@@ -59,7 +59,6 @@ const Collection = ({ sxBox }) => {
             </Typography>
           );
         })}
-        ``
       </Box>
       <Border />
       <HeadingPagi
@@ -77,6 +76,8 @@ const Collection = ({ sxBox }) => {
 
 const CardWrapper = ({ currentPosts }) => {
   const dispatch = useDispatch();
+  const { selectedContract } = useSelector((state) => state.tokens);
+
   return (
     <Box
       sx={{
@@ -102,23 +103,35 @@ const CardWrapper = ({ currentPosts }) => {
           },
         ];
         return (
-          <Link href="/token" key={i}>
+          <Link
+            href={`/collection/${selectedContract.id}/${_.identifie}`}
+            key={i}
+          >
             <Box
+              sx={{
+                width: '180px',
+              }}
               onClick={() => {
                 dispatch(setSelectedToken(_));
               }}
             >
+              <Box></Box>
               <Box
                 sx={{
-                  width: '180px',
-                  height: '180px',
                   position: 'relative',
-                  '& > span': {
-                    borderRadius: '20px',
-                  },
                 }}
               >
-                <ImageFallback src={_.info?.image} layout="fill" />
+                <Box
+                  sx={{
+                    height: '180px',
+                    boxShadow: 'rgba(0, 0, 0, 0.24) 0px 0px 22px',
+                    '& > span': {
+                      borderRadius: '20px',
+                    },
+                  }}
+                >
+                  <ImageFallback src={_.info?.image} layout="fill" />
+                </Box>
               </Box>
 
               <Box
@@ -127,30 +140,37 @@ const CardWrapper = ({ currentPosts }) => {
                   p: '1vh 1vw',
                   borderRadius: '20px',
                   backgroundColor: 'background.smallCard',
-                  // width: '100%',
+                  boxShadow: 'rgba(0, 0, 0, 0.24) 0px 0px 22px',
                   mt: 1,
-                  overflow: 'auto',
+                  overflow: 'hidden',
                 }}
               >
                 {obj.map((_, i) => {
                   return (
-                    <Typography
-                      key={i}
-                      variant="subtitle2"
+                    <Box
                       sx={{
-                        fontWeight: '700',
+                        display: 'flex',
                       }}
                     >
-                      {_.name}
-                      <Box
-                        component="span"
+                      <Typography
+                        key={i}
+                        variant="subtitle2"
+                        sx={{
+                          fontWeight: '700',
+                          position: 'inline-block',
+                        }}
+                      >
+                        {_.name + ': '}
+                      </Typography>
+                      <Typography
+                        variant="subtitle2"
                         sx={{
                           fontWeight: '400',
                         }}
                       >
-                        {'  ' + _.value}
-                      </Box>
-                    </Typography>
+                        {_.value}
+                      </Typography>
+                    </Box>
                   );
                 })}
               </Box>

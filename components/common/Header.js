@@ -11,8 +11,7 @@ const Header = ({ sx }) => {
         display: { md: 'grid' },
         gridTemplateAreas: '"space search walletBtn"',
         gridTemplateColumns: '1fr 3fr 1fr',
-        height: { xs: '150px' },
-        py: 4,
+        py: 1,
         gap: 3,
       }}
     >

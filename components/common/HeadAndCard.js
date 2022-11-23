@@ -5,7 +5,11 @@ import { CardBox } from '../styled/MarginBox';
 
 const HeadAndCard = ({ headText = 'Details', icon, children }) => {
   return (
-    <CardBox>
+    <CardBox
+      sx={{
+        height: '100%',
+      }}
+    >
       <Box
         sx={{
           display: 'flex',

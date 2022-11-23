@@ -1,40 +1,5 @@
-import { Box } from '@mui/material';
-const arr = ['First', '<', 1, 2, 3, '>'];
-
-// const Pagination = ({ mobile }) => (
-// <Box
-//   sx={{
-//     marginLeft: 'auto',
-//     width: 'fit-content',
-//     display: {
-//       xs: !mobile && 'none',
-//       md: 'block',
-//     },
-//   }}
-// >
-//     {arr.map((_, i) => (
-{
-  /* <Box
-  component="span"
-  key={i}
-  sx={{
-    px: 2,
-    py: 1,
-    backgroundColor: 'background.smallCard',
-    mx: 1,
-    borderRadius: '4px',
-  }}
->
-  {_}
-</Box> */
-}
-//     ))}
-//   </Box>
-// );
-
-// export default Pagination;
-
 import React from 'react';
+import { Box } from '@mui/material';
 
 const Pagination = ({
   recordPerPage,
@@ -87,7 +52,9 @@ const Pagination = ({
 
   const getPaginationGroup = () => {
     let arr = [];
-    debugger;
+    if (pageNumbers.length <= pageLimit) {
+      return pageNumbers;
+    }
     let last = pageNumbers[pageNumbers.length - 1];
     if (currentPage + pageLimit >= last) {
       for (let i = 0; i < pageLimit; i++) {
@@ -113,8 +80,8 @@ const Pagination = ({
       }
     }
 
-    // return arr;
-    return pageNumbers;
+    return arr;
+    // return pageNumbers;
   };
   return (
     <Box
@@ -123,13 +90,13 @@ const Pagination = ({
         width: 'fit-content',
         display: {
           xs: !mobile && 'none',
-          md: 'block',
+          md: 'flex',
         },
       }}
     >
       <Item onClick={prevPage} text="Prev" />
 
-      {/* <StartPagination /> */}
+      <StartPagination />
       {getPaginationGroup().map((number, i) => (
         <Box
           key={i}
@@ -147,7 +114,7 @@ const Pagination = ({
           {number}
         </Box>
       ))}
-      {/* <EndPagination /> */}
+      <EndPagination />
       <Item onClick={nextPage} text="Next" />
     </Box>
   );
